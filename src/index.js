@@ -11,8 +11,7 @@ app.engine('html',require('ejs').renderFile)
 app.set('views',path.join(__dirname,'Views'))
 
 //routes
-
-app.use(require('./routes/index'))
+app.use(require('./routes/routes'))
 
 //static files 
 app.use(express.static(path.join(__dirname, "public")));
