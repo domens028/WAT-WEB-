@@ -1,22 +1,21 @@
 
 <html>
-<%  if(success_msg.length > 0) { %>
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <%= success_msg %>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+<%  if(message) { %>
+  <script>
+    $( document ).ready(function() {
+      $('.toast').toast('show');
+    });
+  </script>
+  <div class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <%= message.message %>
+    </div>
+  </div>
 <% } %>
 
-<%  if(error_msg.length > 0) { %>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <%= error_msg %>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <% } %>
 
 </html>
 

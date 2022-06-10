@@ -35,9 +35,8 @@ app.use(flash());
 //Global variables
 app.use((req,res,next) => {
 
-    res.locals.success_msg = req.flash("success_msg");
-    res.locals.error_msg = req.flash("error_msg");
-    res.locals.error = req.flash("error");
+    res.locals.message = req.session.message
+    delete req.session.message
     res.locals.loggedin = req.session.loggedin;
     res.locals.user = req.user || null;
     next();
@@ -50,6 +49,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //routes
 app.use(require('./routes/index'))
 app.use(require('./routes/users'))
+app.use(require('./routes/expenses'))
 
 
 //listening server

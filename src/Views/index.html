@@ -2,20 +2,22 @@
 <html lang="en">
     <body id="page-top">
         <%- include("partials/head.html") %>
-       
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <%- include("partials/navigation.html") %>
         <!-- Masthead-->
+    
         <header class="masthead">
             <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase">Erasmus Costs</h1>
-                        <a class="btn btn-primary" href="">Get Started</a>
+                        <a class="btn btn-primary" href="/expenses">Get Started</a>
+                        <%- include("partials/messages.html") %>
                     </div>
                 </div>
             </div>
         </header>
+
         <!-- About-->
         <section class="about-section text-center" id="about">
             <div class="container px-4 px-lg-5">
@@ -23,8 +25,8 @@
                     <div class="col-lg-8">
                         <h2 class="text-white mb-4">Erasmus Costs</h2>
                         <p class="text-white-50">
-                            Erasmus cost is a tool to keep the record of shopping basket expenses in Poland and compare 
-                            prices between  items in polish and spanish supermarkets. 
+                            Erasmus cost is a tool to keep the record of shopping basket expenses in any currency and unify expenses cost in a single 
+                            currency. 
                         </p>
                     </div>
                 </div>
@@ -82,6 +84,5 @@
             </div>
         </section>
         <footer class="footer small text-center  text-black-50"><div class="container px-4 px-lg-5">Copyright &copy; Erasmus Cost 2022</div></footer>
-        <%- include("partials/footer.html") %>
     </body>
 </html>

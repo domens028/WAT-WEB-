@@ -1,8 +1,6 @@
 const passport = require("passport");
 LocalStrategy = require('passport-local').Strategy;
 FacebookStrategy = require('passport-facebook').Strategy;
-
-
 const User = require('../models/User');
 
 passport.use(
@@ -12,14 +10,14 @@ passport.use(
     },
     async (email, password, done) => {
       // Match Email's User
-      const user = await User.findOne({ email: email });
-      
+      const user = await User.findOne({ mail: email });
       if (!user) {
         return done(null, false, { message: "Not User found." });
       } else {
         // Match Password's User
         const match = await user.matchPassword(password);
         if (match) {
+
           return done(null, user);
         } else {
           return done(null, false, { message: "Incorrect Password." });
@@ -33,11 +31,11 @@ passport.use(new FacebookStrategy({
     clientID: '1706657256350037',
     clientSecret: 'b61c15cbdc77cddc994cc95d2b61f778',
     callbackURL: "http://localhost:8080/auth/facebook/callback",
-    profileFields: ['name','email']
+    profileFields: ['id','emails']
   },
+  
   function(accessToken, refreshToken, profile, cb) {
-    console.log(profile)
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    User.findOrCreate({ facebookId: profile.id, mail:profile.emails[0].value }, function (err, user) {
       return cb(err, user);
     });
   }

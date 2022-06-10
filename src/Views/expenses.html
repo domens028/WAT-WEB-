@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+ <%- include("partials/head.html") %> 
+<link href="css/login.css" rel="stylesheet" type="text/css" />  
+<body >
+<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="mainNav">
+<%- include("partials/navigation.html") %>
+<%- include("partials/messages.html") %>
+
+<section class="vh-100 mt-5">
+    <div class="container py-5 h-100">
+        <form method="GET" action='/add_bill'"">
+          <button type="submit" class="btn btn-success" style="color:white">&#43;</button>
+        </form>
+        
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+            <%var i = 1;%>
+            <% expenses.forEach(function(bill) { %>
+              <tr>
+                <th scope="row"><%= i %></th>
+                <td><%= bill.description %></td>
+                <td><%= bill.price %></td>
+                <td><%= bill.currency %></td>
+                <td><%= bill.category %></td>
+                <td><%= bill.date.toDateString(); %> </td>
+              </tr>
+              <% i=i+1; %>
+              <% }); %>
+            </tbody>
+          </table>
+    
+    </div>
+    
+</section>
+</body>
+<footer class="footer small text-center  bg-dark text-black-50"><div class="container px-4 px-lg-5">Copyright &copy; Erasmus Cost 2022</div></footer>
+</html>

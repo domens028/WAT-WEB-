@@ -2,20 +2,23 @@ const expresss = require('express');
 const router = expresss.Router();
 const User = require('../models/User');
 const passport = require('passport')
-
-//routes
-router.get('/', (req, res) => {
-    res.render('index.html');
- });
+const {isAuthenticated} = require('../helpers/helpers');
 
  router.get('/login', (req, res) => {
+   req.session.error = { 
+    message: 'You are logged in.'
+  }
    res.render('login.html');
 });
 
 router.get("/logout", (req, res) => {
    req.session.loggedin = false; 
+   
    req.logout(req.user, err => {
      if(err) return next(err);
+     req.session.message = { 
+      message: 'You are logged out.'
+    }
      res.redirect("/");
    });
  });
@@ -23,16 +26,20 @@ router.get("/logout", (req, res) => {
 
 
 router.post('/login', passport.authenticate('local',{ 
-  failureRedirect: '/login' 
+  failureRedirect: '/login'
+
 }),
 function(req, res) {
   req.session.loggedin = true;
-  req.session.user  = req.user
+  req.session.user  = req.user;
+  req.session.message = { 
+    message: 'You are logged in.'
+  }
   res.redirect('/');
 });
 
 router.post('/auth/facebook',
-  passport.authenticate('facebook'));
+passport.authenticate('facebook', { scope: 'email'}));
 
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
@@ -47,6 +54,8 @@ router.get('/auth/facebook/callback',
 
 });
 
+
+
 router.post('/signup',async (req,res)=>{
   const {name,mail,password,password2} = req.body;
   
@@ -54,20 +63,22 @@ router.post('/signup',async (req,res)=>{
    const mailUser =  await User.findOne({mail: mail});
    console.log(mailUser)
    if (mailUser) {
-      req.flash("error_msg", "The Email is already in use.");
+    req.session.message = { 
+      message: 'The email is already in use.'
+    }
       res.redirect("/register");
    } else {
       // Saving a New User
       const newUser = new User({ name, mail, password });
       newUser.password = await newUser.encryptPassword(password);
       await newUser.save();
-      req.flash("success_msg", "You are registered.");
+      req.session.message = { 
+        message: 'You are registered'
+      }
       res.redirect("/");
    }
 }
 
-
-  
    
 });
 

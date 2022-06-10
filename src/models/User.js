@@ -6,10 +6,12 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
     {
-      name: { type: String, required: true },
+      name: { type: String, },
       mail: { type: String, required: true, unique:true},
-      password: { type: String, required: true },
+      password: { type: String },
       date: { type: Date, default: Date.now },
+      facebookId: {type:String}
+      
     });
 
     UserSchema.plugin(findOrCreate);

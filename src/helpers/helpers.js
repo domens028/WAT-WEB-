@@ -4,7 +4,9 @@ helpers.isAuthenticated = (req,res,next)=>{
     if(req.isAuthenticated()){
         return next();
     }
-    req.flash('error_msg','Not Authorized');
+    req.session.message = { 
+        message: 'The email is already in use.'
+    }
     res.redirect('/login')
 
 };
