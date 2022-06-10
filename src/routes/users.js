@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
  });
 
  router.get('/login', (req, res) => {
-   req.session.loggedin = true; 
    res.render('login.html');
 });
 
@@ -23,9 +22,12 @@ router.get("/logout", (req, res) => {
 
 
 
-router.post('/login', passport.authenticate('local',{ failureRedirect: '/login' }),
+router.post('/login', passport.authenticate('local',{ 
+  failureRedirect: '/login' 
+}),
 function(req, res) {
-  req.session.loggedin = true; 
+  req.session.loggedin = true;
+  req.session.user  = req.user
   res.redirect('/');
 });
 

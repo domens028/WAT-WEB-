@@ -32,14 +32,17 @@ passport.use(
 passport.use(new FacebookStrategy({
     clientID: '1706657256350037',
     clientSecret: 'b61c15cbdc77cddc994cc95d2b61f778',
-    callbackURL: "http://localhost:8080/auth/facebook/callback"
+    callbackURL: "http://localhost:8080/auth/facebook/callback",
+    profileFields: ['name','email']
   },
   function(accessToken, refreshToken, profile, cb) {
+    console.log(profile)
     User.findOrCreate({ facebookId: profile.id }, function (err, user) {
       return cb(err, user);
     });
   }
 ));
+
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
