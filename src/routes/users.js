@@ -46,6 +46,7 @@ router.get('/auth/facebook/callback',
   function(req, res) {
     // Successful authentication, redirect home.
     req.session.loggedin = true; 
+    req.session.user  = req.user;
     res.redirect('/');
 });
 

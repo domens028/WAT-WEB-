@@ -18,6 +18,15 @@ router.get('/add_bill',isAuthenticated,(req, res) => {
   
 });
 
+router.post('/delete_bill',isAuthenticated,async (req,res)=>{
+    const {id} = req.body;
+        // Deleting the bill
+        await Bill.deleteOne({_id: id})
+        req.session.message = { 
+          message: 'You delete the bill correctly'
+        }
+        res.redirect("/expenses");
+     });
 
 router.post('/add_bill',isAuthenticated,async (req,res)=>{
     const {description,price,currency,category} = req.body;

@@ -26,17 +26,27 @@
             </thead>
             <tbody>
             <%var i = 1;%>
+            <% var total = 0.0;%>
             <% expenses.forEach(function(bill) { %>
               <tr>
+            
+                <% total += bill.price %>
                 <th scope="row"><%= i %></th>
                 <td><%= bill.description %></td>
                 <td><%= bill.price %></td>
                 <td><%= bill.currency %></td>
                 <td><%= bill.category %></td>
                 <td><%= bill.date.toDateString(); %> </td>
+                <form action="/delete_bill" method="POST">
+                <input type="hidden" name="id" value= <%=bill._id %> >
+               </input>
+                <td><button type="submit" > - </button></td>
+                </form>
               </tr>
               <% i=i+1; %>
               <% }); %>
+              <td>Total Price = <%=total%></td>
+              
             </tbody>
           </table>
     
