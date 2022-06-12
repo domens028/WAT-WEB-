@@ -3,12 +3,22 @@ const router = expresss.Router();
 const {isAuthenticated} = require('../helpers/helpers');
 const Bill = require('../models/Expenditure');
 const User = require('../models/User');
+const helpers = require('../helpers/helpers');
+
+
 //routes
 
 router.get('/expenses',isAuthenticated ,async  (req, res) => {
     const expenses = await Bill.find({user:req.session.user})
     .sort({ date: "desc" })
     .lean();
+    expenses.forEach(function(bill) {
+        if(bill.currency == "Zloty"){
+            console.log(zlotyToEuro(bill.price))
+        }else{
+            euroToZloty(bill.price)
+        }
+    })
     res.render('expenses.html',{expenses});
   
 });

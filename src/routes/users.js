@@ -5,9 +5,6 @@ const passport = require('passport')
 const {isAuthenticated} = require('../helpers/helpers');
 
  router.get('/login', (req, res) => {
-   req.session.error = { 
-    message: 'You are logged in.'
-  }
    res.render('login.html');
 });
 
@@ -62,7 +59,6 @@ router.post('/signup',async (req,res)=>{
   
   if(password == password2){
    const mailUser =  await User.findOne({mail: mail});
-   console.log(mailUser)
    if (mailUser) {
     req.session.message = { 
       message: 'The email is already in use.'

@@ -1,19 +1,22 @@
 
 <html>
+<link href="css/login.css" rel="stylesheet" type="text/css" /> 
 <%  if(message) { %>
   <script>
     $( document ).ready(function() {
       $('.toast').toast('show');
     });
   </script>
-  <div class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  <div style="display: flex; justify-content:center;">
+    <div class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          <%= message.message %>
+        </div>
     </div>
-    <div class="toast-body">
-      <%= message.message %>
-    </div>
-  </div>
+ </div>
 <% } %>
 
 

@@ -13,6 +13,9 @@
                 <li class="nav-item"><a class="nav-link" href="/#contact">Contact</a></li>
                 <% if(loggedin){%>
                     <li class="nav-item"><a class="nav-link" href="/logout">LogOut</a></li>
+                    <%if(user.name){%>
+                    <li class="nav-item"><a class="nav-link" href="/user_panel">User Panel</a></li>
+                    <%}%>
                 <% }else{%>
                     <li class="nav-item"><a class="nav-link" href="/login">LogIn</a></li>
                 <% } %>

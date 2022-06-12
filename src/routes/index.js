@@ -7,7 +7,8 @@ router.get('/' ,(req, res) => {
     res.render('index.html');
  });
 
-router.get('/panel',isAuthenticated ,(req, res) => {
+router.get('/user_panel',isAuthenticated ,(req, res) => {
+   
     res.render('userPanel.html');
   
 });
