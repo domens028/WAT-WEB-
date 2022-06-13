@@ -25,11 +25,18 @@
             </thead>
             <tbody>
             <%var i = 1;%>
-            <% var total = 0.0;%>
+            <% var total_zl = 0.0;%>
+            <% var total_euro = 0.0;%>
             <% expenses.forEach(function(bill) { %>
               <tr>
             
-                <% total += bill.price %>
+                <% if(bill.currency == "zl"){ %>
+                  <% total_zl += bill.price; %>
+                  <% total_euro += (bill.price / 4.6); %>
+                <% }else{ %>
+                  <% total_euro += bill.price; %>
+                  <% total_zl += (bill.price * 4.6); %>
+                <% } %>
                 <th scope="row"><%= i %></th>
                 <td><%= bill.description %></td>
                 <td><%= bill.price %></td>
@@ -44,7 +51,8 @@
               </tr>
               <% i=i+1; %>
               <% }); %>
-              <td>Total Price = <%=total%></td>
+              <td>Total Price in Euro = <%=total_euro.toFixed(2) + "€" %></td>
+              <td>Total Price in Zloty = <%=total_zl.toFixed(2) + "pln" %></td>
               
             </tbody>
           </table>
