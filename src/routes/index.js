@@ -8,13 +8,8 @@ router.get('/' ,(req, res) => {
  });
 
 router.get('/user_panel',isAuthenticated ,(req, res) => {
-   
     res.render('userPanel.html');
-  
 });
 
  
-
-
-
  module.exports = router;

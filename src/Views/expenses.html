@@ -8,7 +8,7 @@
 <%- include("partials/messages.html") %>
 <section class="vh-100 mt-5">
     <div class="container py-5 h-100">
-        <form method="GET" action='/add_bill'"">
+        <form method="GET" action='/add_bill'>
           <button type="submit" class="btn btn-success" style="color:white">&#43;</button>
         </form>
         
@@ -21,6 +21,27 @@
                 <th scope="col">Currency</th>
                 <th scope="col">Category</th>
                 <th scope="col">Date</th>
+                <th scope="col">
+                  <form method="POST" action="/expenses_order">
+                  <select name="order" class="form-select" aria-label="Default select example">
+                    <option  selected>Order by</option>
+                    <option value="all">All</option>
+                    <option  value="leisure">Leisure</option>
+                    <option value="food">Food</option>
+                    <option value="tansport">Transport</option>
+                    <option value="lodging">Lodging</option>
+                    <option value="extra">Extra</option>
+                    <option value="zl">Zloty</option>
+                    <option value="euro">Euro</option>
+                  </select>
+          
+                </th>
+                <th scope="col">
+                  <button type="submit" >Order by</button>
+                </th>
+               
+              </form>
+
               </tr>
             </thead>
             <tbody>
@@ -51,8 +72,13 @@
               </tr>
               <% i=i+1; %>
               <% }); %>
-              <td>Total Price in Euro = <%=total_euro.toFixed(2) + "€" %></td>
-              <td>Total Price in Zloty = <%=total_zl.toFixed(2) + "pln" %></td>
+              <tr>
+                <td>Total Price in Euro = <%=total_euro.toFixed(2) + "€" %></td>
+              </tr>
+              <tr>
+                <td>Total Price in Zloty = <%=total_zl.toFixed(2) + "pln" %></td>
+              </tr>
+      
               
             </tbody>
           </table>

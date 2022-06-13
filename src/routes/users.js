@@ -74,9 +74,7 @@ router.post('/signup',async (req,res)=>{
       }
       res.redirect("/");
    }
-}
-
-   
+}  
 });
 
  module.exports = router;
