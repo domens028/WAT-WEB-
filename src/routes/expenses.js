@@ -12,13 +12,6 @@ router.get('/expenses',isAuthenticated ,async  (req, res) => {
     const expenses = await Bill.find({user:req.session.user})
     .sort({ date: "desc" })
     .lean();
-    expenses.forEach(function(bill) {
-        if(bill.currency == "Zloty"){
-            console.log(zlotyToEuro(bill.price))
-        }else{
-            euroToZloty(bill.price)
-        }
-    })
     res.render('expenses.html',{expenses});
   
 });
